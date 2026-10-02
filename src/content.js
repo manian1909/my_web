@@ -1,4 +1,4 @@
-// All site copy lives here. Sourced from the resume (resume (3).pdf) — edit freely.
+// All site copy lives here. Sourced from the resume (Himank-Singhvi-Resume.pdf) — edit freely.
 
 export const profile = {
   name: 'Himank Singhvi',
