@@ -2,11 +2,16 @@ import { featured, more } from '../content'
 import { Diagram } from './Diagrams'
 import { Reveal } from './Reveal'
 import { Terminal } from './Terminal'
+import { RoleMatch } from './RoleMatch'
+import { GithubPulse } from './GithubPulse'
+import { matchesLens, useLens } from '../lens'
 import { ArrowUpRight } from './Icons'
 
 function Feature({ item, index }) {
+  const { lens, setLens } = useLens()
+  const lit = matchesLens(lens, item.stack)
   return (
-    <Reveal as="article" className="feature" id={item.id}>
+    <Reveal as="article" className={`feature ${lens && !lit ? 'is-dim' : ''}`} id={item.id}>
       <div className="feature-text">
         <div className="feature-meta">
           <span className="feature-index mono">{String(index + 1).padStart(2, '0')}</span>
@@ -23,8 +28,10 @@ function Feature({ item, index }) {
         <div className="feature-foot">
           <ul className="tags" aria-label="Technologies">
             {item.stack.map((s) => (
-              <li key={s} className="tag">
-                {s}
+              <li key={s}>
+                <button type="button" className={`tag ${lens && matchesLens(lens, [s]) ? 'is-lens' : ''}`} onClick={() => setLens(s)} title={`Highlight work that uses ${s}`}>
+                  {s}
+                </button>
               </li>
             ))}
           </ul>
@@ -42,6 +49,33 @@ function Feature({ item, index }) {
   )
 }
 
+function LensBar() {
+  const { lens, setLens } = useLens()
+  if (!lens) return null
+  const shown = [...featured.map((f) => f.stack), ...more.map((m) => [m.meta])].filter((l) => matchesLens(lens, l)).length
+  return (
+    <div className="lens-bar" role="status">
+      <span className="mono">
+        Showing work that uses <b>{lens}</b> · {shown} {shown === 1 ? 'project' : 'projects'}
+      </span>
+      <button type="button" className="chip-btn" onClick={() => setLens(lens)}>
+        Clear
+      </button>
+    </div>
+  )
+}
+
+function MoreCard({ m, i }) {
+  const { lens } = useLens()
+  return (
+    <Reveal as="article" className={`more-card ${lens && !matchesLens(lens, [m.meta]) ? 'is-dim' : ''}`} delay={i * 70}>
+      <span className="mono dim">{m.meta}</span>
+      <h4>{m.title}</h4>
+      <p>{m.text}</p>
+    </Reveal>
+  )
+}
+
 export function Work() {
   return (
     <section className="section wrap" id="work" aria-labelledby="work-title">
@@ -52,6 +86,7 @@ export function Work() {
         </Reveal>
       </div>
 
+      <LensBar />
       <div className="features">
         {featured.map((item, i) => (
           <Feature key={item.id} item={item} index={i} />
@@ -61,13 +96,17 @@ export function Work() {
       <h3 className="subhead">Also</h3>
       <div className="more">
         {more.map((m, i) => (
-          <Reveal as="article" className="more-card" key={m.title} delay={i * 70}>
-            <span className="mono dim">{m.meta}</span>
-            <h4>{m.title}</h4>
-            <p>{m.text}</p>
-          </Reveal>
+          <MoreCard key={m.title} m={m} i={i} />
         ))}
       </div>
+
+      <h3 className="subhead">Does my work fit your role?</h3>
+      <Reveal>
+        <RoleMatch />
+      </Reveal>
+
+      <h3 className="subhead">Live from GitHub</h3>
+      <GithubPulse />
 
       <h3 className="subhead" id="shell">
         Try it: a tiny shell

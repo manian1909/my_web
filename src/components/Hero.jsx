@@ -36,13 +36,6 @@ export function Hero() {
           <div className="hero-intro fade-in" style={{ '--d': '420ms' }}>
             <p>{profile.intro}</p>
             <p className="offline">{profile.offline}</p>
-            {profile.availability && (
-              <a className="avail" href="#contact">
-                <span className="status-dot" aria-hidden="true" />
-                {profile.availability}
-                <ArrowUpRight />
-              </a>
-            )}
           </div>
 
           <div className="hero-actions fade-in" style={{ '--d': '540ms' }}>

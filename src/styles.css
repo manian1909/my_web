@@ -1,20 +1,20 @@
 /* ---------- Tokens ---------- */
 :root {
-  --bg: #f5efdf;
-  --bg-card: #fcf8ec;
-  --bg-inset: #ece4cf;
+  --bg: #ffffff;
+  --bg-card: #ffffff;
+  --bg-inset: #f5f5f7;
   --ink: #10142b;
-  --ink-2: #454a66;
-  --ink-3: #777a90;
-  --rule: #ddd3ba;
-  --rule-strong: #c4b99b;
+  --ink-2: #454a5c;
+  --ink-3: #737785;
+  --rule: #e7e7ec;
+  --rule-strong: #cfd0d8;
   --accent: #1d3fe0;
   --accent-on: #ffffff;
   --accent-text: #1d3fe0;
   --accent-rgb: 29, 63, 224;
   --ink-rgb: 16, 20, 43;
   --sim-ink: #10142b;
-  --sim-dim: #a39a82;
+  --sim-dim: #a9abb6;
   --selection: rgba(29, 63, 224, 0.22);
   --tone-rgb: var(--accent-rgb);
   --tone: var(--accent-text);

@@ -20,49 +20,6 @@
   text-wrap: pretty;
 }
 
-/* ---------- NCSC medal ---------- */
-.ncsc {
-  display: grid;
-  grid-template-columns: minmax(0, 0.6fr) minmax(0, 1.4fr);
-  align-items: center;
-  gap: clamp(1.5rem, 4vw, 4rem);
-  margin-bottom: 1.5rem;
-  padding: clamp(1.4rem, 3vw, 2.5rem);
-  border: 1px solid var(--rule);
-  border-radius: 26px;
-  background: var(--bg-card);
-}
-.ncsc-art {
-  display: grid;
-  place-items: center;
-}
-.medal {
-  width: min(100%, 210px);
-  height: auto;
-}
-.ncsc-text {
-  display: grid;
-  justify-items: start;
-  gap: 0.9rem;
-}
-.ncsc h3 {
-  font-family: var(--display);
-  font-weight: 800;
-  font-size: clamp(2rem, 4.4vw, 3.4rem);
-  line-height: 1;
-  letter-spacing: -0.035em;
-}
-.ncsc-org {
-  font-family: var(--mono);
-  font-size: 0.85rem;
-  color: var(--ink-3);
-}
-.ncsc-text p:not(.ncsc-org) {
-  color: var(--ink-2);
-  max-width: 46rem;
-  text-wrap: pretty;
-}
-
 /* ---------- Hobbies ---------- */
 .hobbies {
   display: grid;
@@ -122,9 +79,6 @@
 }
 
 @media (max-width: 960px) {
-  .ncsc {
-    grid-template-columns: minmax(0, 1fr);
-  }
   .hobbies {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

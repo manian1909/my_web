@@ -39,6 +39,8 @@ export function CommandPalette() {
       { group: 'Do', label: 'Download resume', keywords: 'cv pdf', run: download(profile.resume) },
       { group: 'Do', label: 'Back to top', run: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
       { group: 'Do', label: 'Copy email address', run: () => navigator.clipboard?.writeText(profile.email) },
+      { group: 'Do', label: 'Keyboard shortcuts', keywords: 'keys help vim j k', run: () => window.dispatchEvent(new Event('open-shortcuts')) },
+      { group: 'Do', label: 'Leave a message', keywords: 'contact form write send mail comment', run: go('message') },
       { group: 'Do', label: 'Toggle light / dark theme', run: toggleTheme },
     ],
     [],

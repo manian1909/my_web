@@ -1,9 +1,9 @@
-import { awards, education, ncsc, skills } from '../content'
-import { Medal } from './Illustrations'
-import { ArrowUpRight } from './Icons'
+import { awards, education, skills } from '../content'
 import { Reveal } from './Reveal'
+import { useLens } from '../lens'
 
 export function About() {
+  const { lens, setLens } = useLens()
   return (
     <section className="section wrap" id="about" aria-labelledby="about-title">
       <div className="section-head">
@@ -12,21 +12,6 @@ export function About() {
           Where I study, and what I use.
         </Reveal>
       </div>
-
-      <Reveal className="ncsc">
-        <div className="ncsc-art">
-          <Medal />
-        </div>
-        <div className="ncsc-text">
-          <span className="kind">Achievement</span>
-          <h3>{ncsc.title}</h3>
-          <p className="ncsc-org">{ncsc.org}</p>
-          <p>{ncsc.text}</p>
-          <a className="link" href={ncsc.link} target="_blank" rel="noreferrer">
-            About NCSC <ArrowUpRight />
-          </a>
-        </div>
-      </Reveal>
 
       <div className="about-grid">
         <Reveal className="card edu">
@@ -52,7 +37,10 @@ export function About() {
           <ul>
             {awards.map((a) => (
               <li key={a.label}>
-                <span className={`award-figure ${a.word ? 'is-word' : ''}`}>{a.figure}</span>
+                <span className={`award-figure ${a.word ? 'is-word' : ''}`}>
+                  {a.prefix && <small>{a.prefix}</small>}
+                  {a.figure}
+                </span>
                 <span className="award-text">
                   <strong>{a.label}</strong>
                   <span className="mono dim">{a.detail}</span>
@@ -69,7 +57,11 @@ export function About() {
             <span className="label">{g.group}</span>
             <ul>
               {g.items.map((s) => (
-                <li key={s}>{s}</li>
+                <li key={s}>
+                  <button type="button" className="skill-btn" aria-pressed={lens === s} onClick={() => { setLens(s); document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' }) }} title={`Show work that uses ${s}`}>
+                    {s}
+                  </button>
+                </li>
               ))}
             </ul>
           </Reveal>

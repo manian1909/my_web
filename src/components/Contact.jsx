@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { profile } from '../content'
 import { Reveal } from './Reveal'
 import { ArrowUp, ArrowUpRight } from './Icons'
+import { ContactForm } from './ContactForm'
 
 const clock = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' })
 
@@ -39,6 +40,7 @@ export function Contact() {
           Let&rsquo;s talk.
         </Reveal>
 
+        <div className="contact-grid">
         <Reveal className="contact-body" delay={80}>
           <p>
             Working on something in backend, ML or robotics, or have an internship or project in mind? Email is the
@@ -62,12 +64,19 @@ export function Contact() {
             </a>
           </div>
         </Reveal>
+        <Reveal delay={160}>
+          <div id="message"><ContactForm /></div>
+        </Reveal>
+        </div>
 
         <div className="footer mono">
           <span>
             © {new Date().getFullYear()} {profile.name}
           </span>
           <LocalTime />
+          <button type="button" className="link linklike" onClick={() => window.dispatchEvent(new Event('open-shortcuts'))}>
+            Shortcuts <kbd>?</kbd>
+          </button>
           <a className="link" href="#top">
             Back to top <ArrowUp />
           </a>

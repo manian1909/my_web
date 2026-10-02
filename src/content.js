@@ -11,9 +11,11 @@ export const profile = {
   intro:
     'CS student at IIIT Hyderabad. I build backend systems, ML models and autonomous robots, and I like writing the hard parts from scratch so I actually understand how they work.',
   offline: 'Away from the keyboard: singing, math, physics, cooking and gardening.',
-  // Shown as a pill in the hero. Set to '' to hide it.
-  availability: 'Open to internships and full-time roles from 2027',
 }
+
+// Where the contact form posts. FormSubmit (formsubmit.co) forwards each message to this address, no backend needed.
+// The first message ever sent triggers a one-time activation email to the address below: click the link in it.
+export const contactEndpoint = `https://formsubmit.co/ajax/${profile.email}`
 
 export const status = [
   { k: 'Just finished', v: 'SDE intern at Chubb', sub: 'Jun – Jul 2026' },
@@ -30,13 +32,14 @@ export const featured = [
     when: 'Jun – Jul 2026',
     title: 'Rebuilding a legacy Java app for the cloud',
     summary:
-      'Chubb’s “Third Party” application was an older Java application. I modernized it into a Spring Boot microservice and set it up to deploy on Azure Kubernetes Service (AKS), with an automated release pipeline in front of it.',
+      'Chubb’s “Third Party” application was an older Java application that relied on a message queue (MQ). I rebuilt its backend as a Spring Boot microservice with plain, fully synchronous REST APIs, and set it up to deploy on Azure Kubernetes Service (AKS) behind an automated release pipeline.',
     points: [
-      'Rebuilt the app as a Spring Boot microservice that deploys on AKS.',
+      'Removed the MQ from the flow and converted the backend into a Spring Boot microservice with synchronous REST APIs, which made the app faster. It deploys on AKS.',
       'Built a Jenkins CI/CD pipeline that runs build, test and deploy automatically, cutting the manual work of a release.',
       'Configured Dynaflow to orchestrate the pipeline build, making data flow between services more reliable.',
+      'Used Claude and the GSD workflow to get this done faster, and completed a course on each.',
     ],
-    stack: ['Java', 'Spring Boot', 'Jenkins', 'Kubernetes (AKS)', 'Dynaflow'],
+    stack: ['Java', 'Spring Boot', 'REST APIs', 'Jenkins', 'Kubernetes (AKS)', 'Dynaflow', 'Claude', 'GSD'],
     diagram: { type: 'pipeline' },
   },
   {
@@ -136,7 +139,7 @@ export const experience = [
     when: 'Jun – Jul 2026',
     org: 'Chubb',
     role: 'Software Development Engineering Intern',
-    note: 'Legacy Java app → Spring Boot on AKS, Jenkins CI/CD.',
+    note: 'Legacy Java app with MQ → synchronous Spring Boot microservice on AKS, Jenkins CI/CD.',
     target: 'chubb',
   },
   {
@@ -183,18 +186,13 @@ export const education = {
   ],
 }
 
-export const ncsc = {
-  title: 'National-level Gold Medal',
-  org: 'National Children’s Science Congress (NCSC)',
-  text: 'NCSC is India’s national science programme for children aged 10 to 17, run by the Department of Science and Technology since 1993. Young scientists take a science project on a local problem through district and state rounds, and the best go on to the national congress. I won a gold medal at the national level.',
-  link: 'https://www.n-csc.in/',
-}
-
 export const awards = [
-  { figure: '426', label: 'JEE Main', detail: 'All India Rank' },
-  { figure: '2717', label: 'JEE Advanced', detail: 'All India Rank' },
+  // JEE 2023: 11,13,325 candidates appeared in JEE Main (NTA); 1,80,372 appeared in both papers of JEE Advanced.
+  { prefix: 'Top', figure: '0.04%', label: 'JEE Main 2023', detail: 'of 11.1 lakh candidates' },
+  { prefix: 'Top', figure: '1.5%', label: 'JEE Advanced 2023', detail: 'of 1.8 lakh candidates' },
   { figure: '8', label: 'STSE Class 12', detail: 'Rank' },
   { figure: '95', label: 'STSE Class 10', detail: 'Rank' },
+  { figure: 'Gold', label: 'NCSC', detail: 'National-level medal, National Children’s Science Congress', word: true },
   { figure: 'Dean’s List', label: 'Spring 2026', detail: 'IIIT Hyderabad', word: true },
 ]
 

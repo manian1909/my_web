@@ -6,6 +6,14 @@ import { Reveal } from './Reveal'
 
 const NO_PARAMS = { current: null }
 
+// Runs a scene as a quiet backdrop: it animates but ignores clicks and drags.
+const quiet = (scene) => (env, params) => {
+  const { frame, resize, destroy } = scene(env, params)
+  return { frame, resize, destroy }
+}
+const quietGarden = quiet(gardenScene)
+const quietKitchen = quiet(kitchenScene)
+
 function Stage({ scene, params = NO_PARAMS, label, className = '' }) {
   const ref = useCanvas(scene, params)
   return (
@@ -156,8 +164,8 @@ const cards = {
   singing: { body: <Piano />, hint: 'Tap the keys, or click here and press A to K' },
   math: { body: <Epicycles />, hint: 'Draw any shape. Spinning circles rebuild it' },
   physics: { body: <Stage scene={gravityScene} label="Gravity sandbox" className="tall" />, hint: 'Click to add a planet. Drag and release to launch one' },
-  cooking: { body: <Stage scene={kitchenScene} label="A bubbling pot" className="tall" />, hint: 'Click to drop an ingredient into the pot' },
-  gardening: { body: <Stage scene={gardenScene} label="A small garden" className="tall" />, hint: 'Click the ground to plant a flower' },
+  cooking: { body: <Stage scene={quietKitchen} label="A bubbling pot" className="tall is-quiet" /> },
+  gardening: { body: <Stage scene={quietGarden} label="A small garden" className="tall is-quiet" /> },
 }
 
 export function Hobbies() {
@@ -166,10 +174,10 @@ export function Hobbies() {
       <div className="section-head">
         <span className="label">Beyond code</span>
         <Reveal as="h2" className="section-title" id="beyond-title">
-          The rest of me. Go on, play.
+          When I&rsquo;m not coding.
         </Reveal>
         <Reveal as="p" className="section-intro" delay={60}>
-          {profile.offline} These are little toys for each of them.
+          {profile.offline}
         </Reveal>
       </div>
 
@@ -179,7 +187,7 @@ export function Hobbies() {
             <div className="hobby-art">{cards[h.id].body}</div>
             <h3>{h.title}</h3>
             <p>{h.text}</p>
-            <p className="hint mono">{cards[h.id].hint}</p>
+            {cards[h.id].hint && <p className="hint mono">{cards[h.id].hint}</p>}
           </Reveal>
         ))}
       </div>

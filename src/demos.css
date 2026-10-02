@@ -45,34 +45,6 @@
   -webkit-text-stroke-color: var(--accent-text);
 }
 
-/* medal */
-.medal {
-  filter: drop-shadow(0 16px 26px rgba(202, 138, 4, 0.3));
-  transform-origin: 50% 0;
-  animation: sway 5s ease-in-out infinite;
-}
-@keyframes sway {
-  0%,
-  100% {
-    transform: rotate(-3deg);
-  }
-  50% {
-    transform: rotate(3deg);
-  }
-}
-.medal-shine {
-  animation: shine 3.6s ease-in-out infinite;
-}
-@keyframes shine {
-  0%,
-  55% {
-    transform: translateX(0) rotate(20deg);
-  }
-  100% {
-    transform: translateX(260px) rotate(20deg);
-  }
-}
-
 /* ---------- Shared demo bits ---------- */
 .demo {
   width: 100%;
@@ -588,9 +560,9 @@
   align-items: flex-end;
   justify-content: center;
   padding: 0 0 0.45rem;
-  border: 1px solid #c9c4b4;
+  border: 1px solid #cfd0d8;
   border-radius: 0 0 8px 8px;
-  background: #f6f3ea;
+  background: #f5f5f7;
   color: #7b7d8c;
   font-family: var(--mono);
   font-size: 0.7rem;
